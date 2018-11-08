@@ -22,7 +22,7 @@ public class WordSearch{
             board = board + data[i][j];
             board = board + "\n";
           } else {
-            board = board + data[i][j];
+            board = board + data[i][j] + "";
           }
         }
       }
