@@ -31,6 +31,9 @@ public class WordSearch{
       }
       int index = 0;
       for(int i = col; i < word.length() + col; i = i + 1) {
+        if (data[row][i] != '_' || data[row][i] != word.charAt(index)) {
+          return false;
+        }
         data[row][i] = word.charAt(index);
         index = index + 1;
       }
