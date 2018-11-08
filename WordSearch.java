@@ -22,7 +22,7 @@ public class WordSearch{
             board = board + data[i][j];
             board = board + "\n";
           } else {
-            board = board + data[i][j] + "";
+            board = board + data[i][j];
           }
         }
       }
@@ -40,6 +40,8 @@ public class WordSearch{
         if (data[row][i] != '_' && data[row][i] != word.charAt(index)) {
           return false;
         }
+      }
+      for(int i = col; i < word.length() + col; i = i + 1) {
         data[row][i] = word.charAt(index);
         index = index + 1;
       }
@@ -57,6 +59,8 @@ public class WordSearch{
         if (data[i][col] != '_' && data[i][col] != word.charAt(index)) {
           return false;
         }
+      }
+      for(int i = row; i < word.length() + row; i = i + 1) {
         data[i][col] = word.charAt(index);
         index = index + 1;
       }
