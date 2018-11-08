@@ -4,9 +4,12 @@ public class WordSearch{
       data = new char[rows][cols];
       clear();
     }
-
-    /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
+      for(int i = 0; i < data.length; i = i + 1) {
+        for(int j = 0; j < data[i].length; j = j + 1) {
+          data[i][j] = '_';
+        }
+      }
     }
 
     /**Each row is a new line, there is a space between each letter
