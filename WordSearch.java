@@ -2,7 +2,7 @@ public class WordSearch{
     private char[][]data;
     public WordSearch(int rows,int cols){
       if (rows < 0 || cols < 0) {
-        throw new IndexOutOfBoundsException("Row or column cannot be negative");
+        throw new IllegalArgumentException("Row or column cannot be negative");
       }
       data = new char[rows][cols];
       clear();
