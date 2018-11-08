@@ -37,10 +37,12 @@ public class WordSearch{
       }
       int index = 0;
       for(int i = col; i < word.length() + col; i = i + 1) {
-        if (data[row][i] != '_' && data[row][i] != word.charAt(i)) {
+        if (data[row][i] != '_' && data[row][i] != word.charAt(index)) {
           return false;
         }
+        index = index + 1;
       }
+      index = 0;
       for(int i = col; i < word.length() + col; i = i + 1) {
         data[row][i] = word.charAt(index);
         index = index + 1;
@@ -56,10 +58,12 @@ public class WordSearch{
       }
       int index = 0;
       for(int i = row; i < word.length() + row; i = i + 1) {
-        if (data[i][col] != '_' && data[i][col] != word.charAt(i)) {
+        if (data[i][col] != '_' && data[i][col] != word.charAt(index)) {
           return false;
         }
+        index = index + 1;
       }
+      index = 0;
       for(int i = row; i < word.length() + row; i = i + 1) {
         data[i][col] = word.charAt(index);
         index = index + 1;
