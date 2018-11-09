@@ -2,12 +2,13 @@ import java.util.*;
 import java.io.*;
 public class WordSearch{
     private char[][]data;
-    public WordSearch(int rows,int cols){
-      if (rows < 0 || cols < 0) {
-        throw new IllegalArgumentException("Row or column cannot be negative");
-      }
-      data = new char[rows][cols];
-      clear();
+    private int seed;
+    private Random randgen;
+    private ArrayList<String>wordsToAdd;
+    private ArrayList<String>wordsAdded;
+    public WordSearch(int rows, int cols, String fileName) {
+    }
+    public WordSearch(int rows, int cols, String fileName, int randSeed) {
     }
     private void clear(){
       for(int i = 0; i < data.length; i = i + 1) {
