@@ -10,6 +10,10 @@ public class WordSearch{
     }
     public WordSearch(int rows, int cols, String fileName, int randSeed) {
     }
+    private boolean addWord( int r, int c, String word, int rowIncrement, int colIncrement) {
+    }
+    private boolean addAllWords() {
+    }
     private void clear(){
       for(int i = 0; i < data.length; i = i + 1) {
         for(int j = 0; j < data[i].length; j = j + 1) {
