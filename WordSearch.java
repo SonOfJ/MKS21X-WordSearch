@@ -70,4 +70,40 @@ public class WordSearch{
       }
       return true;
     }
+    public boolean addWordDiagonal(String word,int row, int col){
+      int r = row;
+      int c = col;
+      if (row < 0 || col < 0 || row >= data.length || col >= data[0].length) {
+        return false;
+      }
+      if (word.length() > data.length - row) {
+        return false;
+      }
+      if (word.length() > data[row].length - col) {
+        return false;
+      }
+      int index = 0;
+      for(int i = r; i < word.length() + r; i = i + 1) {
+        if (data[i][col] != '_' && data[i][col] != word.charAt(index)) {
+          return false;
+        }
+        index = index + 1;
+        col = col + 1;
+      }
+      index = 0;
+      for(int i = c; i < word.length() + c; i = i + 1) {
+        if (data[row][i] != '_' && data[row][i] != word.charAt(index)) {
+          return false;
+        }
+        index = index + 1;
+        row = row + 1;
+      }
+      index = 0;
+      for(int i = r; i < word.length() + r; i = i + 1) {
+        data[i][c] = word.charAt(index);
+        index = index + 1;
+        c = c + 1;
+      }
+      return true;
+    }
   }
