@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class WordSearch{
     private char[][]data;
     public WordSearch(int rows,int cols){
