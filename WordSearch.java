@@ -6,7 +6,20 @@ public class WordSearch{
     private Random randgen;
     private ArrayList<String>wordsToAdd;
     private ArrayList<String>wordsAdded;
-    public WordSearch(int rows, int cols, String fileName) {
+    public WordSearch(int rows, int cols, String fileName) throws FileNotFoundException{
+      randgen = new Random();
+      seed = randgen.nextInt();
+      randgen = new Random(seed);
+      data = new char[rows][cols];
+      clear();
+      File stuff = new File(fileName);
+      Scanner read = new Scanner(stuff);
+      wordsToAdd = new ArrayList<>();
+      wordsAdded = new ArrayList<>();
+      while (read.hasNext()) {
+        wordsToAdd.add(read.nextLine().toUpperCase());
+      }
+      addAllWords();
     }
     public WordSearch(int rows, int cols, String fileName, int randSeed) {
     }
