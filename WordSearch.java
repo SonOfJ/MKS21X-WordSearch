@@ -49,10 +49,11 @@ public class WordSearch{
     public String toString(){
       String board = "";
       for(int i = 0; i < data.length; i = i + 1) {
+        board = board + "|";
         for(int j = 0; j < data[i].length; j = j + 1) {
           if (j == data[i].length - 1) {
             board = board + data[i][j];
-            board = board + "\n";
+            board = board + "|\n";
           } else {
             board = board + data[i][j] + " ";
           }
