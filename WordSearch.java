@@ -6,33 +6,43 @@ public class WordSearch{
     private Random randgen;
     private ArrayList<String>wordsToAdd;
     private ArrayList<String>wordsAdded;
-    public WordSearch(int rows, int cols, String fileName) throws FileNotFoundException{
+    public WordSearch(int rows, int cols, String filename) {
+      if (rows < 0 || cols < 0) {
+        throw new IllegalArgumentException();
+      }
+      try {
+        Scanner reader = new Scanner(new File(filename));
+        while (reader.hasNext()) {
+          wordsToAdd.add(reader.next().toUpperCase());
+        }
+      }
+      catch(FileNotFoundException e) {
+        System.out.println(filename + " does not exist.");
+      }
+      data = new char[rows][cols];
+      clear();
       randgen = new Random();
       seed = randgen.nextInt();
       randgen = new Random(seed);
-      data = new char[rows][cols];
-      clear();
-      File stuff = new File(fileName);
-      Scanner read = new Scanner(stuff);
-      wordsToAdd = new ArrayList<>();
-      wordsAdded = new ArrayList<>();
-      while (read.hasNext()) {
-        wordsToAdd.add(read.nextLine().toUpperCase());
-      }
       addAllWords();
     }
-    public WordSearch(int rows, int cols, String fileName, int randSeed) throws FileNotFoundException{
-      seed = randSeed;
-      randgen = new Random(seed);
+    public WordSearch(int rows, int cols, String filename, int randSeed) {
+      if (rows < 0 || cols < 0) {
+        throw new IllegalArgumentException();
+      }
+      try {
+        Scanner reader = new Scanner(new File(filename));
+        while(reader.hasNext()) {
+          wordsToAdd.add(reader.next().toUpperCase());
+        }
+      }
+      catch(FileNotFoundException e) {
+        System.out.println(filename + " does not exist.");
+      }
       data = new char[rows][cols];
       clear();
-      File stuff = new File(fileName);
-      Scanner read = new Scanner(stuff);
-      wordsToAdd = new ArrayList<>();
-      wordsAdded = new ArrayList<>();
-      while (read.hasNext()) {
-        wordsToAdd.add(read.nextLine().toUpperCase());
-      }
+      seed = randSeed;
+      randgen = new Random(seed);
       addAllWords();
     }
     private void clear(){
