@@ -35,10 +35,6 @@ public class WordSearch{
       }
       addAllWords();
     }
-    private boolean addWord( int r, int c, String word, int rowIncrement, int colIncrement) {
-    }
-    private boolean addAllWords() {
-    }
     private void clear(){
       for(int i = 0; i < data.length; i = i + 1) {
         for(int j = 0; j < data[i].length; j = j + 1) {
@@ -89,6 +85,33 @@ public class WordSearch{
       wordsAdded.add(word);
       wordsToAdd.remove(word);
       return true;
+    }
+    private void addAllWords() {
+      for(int i = 0; i < wordsToAdd.size(); i = i + 1) {
+        if (wordsToAdd.size() > 0) {
+          String Vegito = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
+          int r = 0;
+          int c = 0;
+          while (r == 0) {
+            r = randgen.nextInt() % 2;
+          }
+          while (c == 0) {
+            c = randgen.nextInt() % 2;
+          }
+          int row = data.length + 1;
+          int col = data[0].length + 1;
+          while (row == 0) {
+            row = Math.abs(randgen.nextInt() % (data.length + 1));
+          }
+          while (col == 0) {
+            col = Math.abs(randgen.nextInt() % (data[0].length + 1));
+          }
+          int j = 0;
+          while (addWord(Vegito, row, col, r, c) == false || j < 100) {
+            j = j + 1;
+          }
+        }
+      }
     }
     public boolean addWordHorizontal(String word,int row, int col){
       if (row < 0 || col < 0 || row >= data.length || col >= data[0].length) {
