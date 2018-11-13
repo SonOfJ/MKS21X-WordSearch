@@ -65,7 +65,7 @@ public class WordSearch{
       board = board + " (seed: " + seed + ")";
       return board;
     }
-    private boolean addWord( String word, int r, int c, int rowIncrement, int colIncrement) {
+    public boolean addWord( String word, int r, int c, int rowIncrement, int colIncrement) {
       for(int i = 0; i < word.length(); i = i + 1) {
         int row = r + i * rowIncrement;
         int col = c + i * colIncrement;
@@ -86,7 +86,7 @@ public class WordSearch{
       wordsToAdd.remove(word);
       return true;
     }
-    private void addAllWords() {
+    public void addAllWords() {
       for(int i = 0; i < wordsToAdd.size(); i = i + 1) {
         if (wordsToAdd.size() > 0) {
           String Vegito = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
