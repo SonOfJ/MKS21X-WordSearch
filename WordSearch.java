@@ -6,18 +6,13 @@ public class WordSearch{
     private Random randgen;
     private ArrayList<String>wordsToAdd;
     private ArrayList<String>wordsAdded;
-    public WordSearch(int rows, int cols, String filename) {
+    public WordSearch(int rows, int cols, String filename) throws FileNotFoundException {
       if (rows < 0 || cols < 0) {
         throw new IllegalArgumentException();
       }
-      try {
-        Scanner reader = new Scanner(new File(filename));
-        while (reader.hasNext()) {
-          wordsToAdd.add(reader.next().toUpperCase());
-        }
-      }
-      catch(FileNotFoundException e) {
-        System.out.println(filename + " does not exist.");
+      Scanner reader = new Scanner(new File(filename));
+      while (reader.hasNext()) {
+        wordsToAdd.add(reader.next().toUpperCase());
       }
       data = new char[rows][cols];
       clear();
@@ -26,18 +21,13 @@ public class WordSearch{
       randgen = new Random(seed);
       addAllWords();
     }
-    public WordSearch(int rows, int cols, String filename, int randSeed) {
+    public WordSearch(int rows, int cols, String filename, int randSeed) throws FileNotFoundException {
       if (rows < 0 || cols < 0) {
         throw new IllegalArgumentException();
       }
-      try {
-        Scanner reader = new Scanner(new File(filename));
-        while(reader.hasNext()) {
-          wordsToAdd.add(reader.next().toUpperCase());
-        }
-      }
-      catch(FileNotFoundException e) {
-        System.out.println(filename + " does not exist.");
+      Scanner reader = new Scanner(new File(filename));
+      while(reader.hasNext()) {
+        wordsToAdd.add(reader.next().toUpperCase());
       }
       data = new char[rows][cols];
       clear();
