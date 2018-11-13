@@ -97,30 +97,21 @@ public class WordSearch{
       return true;
     }
     public void addAllWords() {
-      for(int i = 0; i < wordsToAdd.size(); i = i + 1) {
-        if (wordsToAdd.size() > 0) {
-          String Vegito = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
-          int r = 0;
-          int c = 0;
-          while (r == 0) {
-            r = randgen.nextInt() % 2;
-          }
-          while (c == 0) {
-            c = randgen.nextInt() % 2;
-          }
-          int row = data.length + 1;
-          int col = data[0].length + 1;
-          while (row == 0) {
-            row = Math.abs(randgen.nextInt() % (data.length + 1));
-          }
-          while (col == 0) {
-            col = Math.abs(randgen.nextInt() % (data[0].length + 1));
-          }
-          int j = 0;
-          while (addWord(Vegito, row, col, r, c) == false || j < 100) {
-            j = j + 1;
-          }
+      int size = wordsToAdd.size();
+      for (int i = 0; wordsToAdd.size() > 0 && i < size + 100; i = i + 1) {
+        String word = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
+        int r = 0;
+        int c = 0;
+        while (r == 0) {
+          r = randgen.nextInt() % 2;
         }
+        while (c == 0) {
+          c = randgen.nextInt() % 2;
+        }
+        int row = data.length;
+        int col = data[0].length;
+        for (int j = 0; j < 100 &&
+        !addWord(word, Math.abs(randgen.nextInt() % (row + 1)), Math.abs(randgen.nextInt() % (col + 1)), r, c); j = j + 1);
       }
     }
     public boolean addWordHorizontal(String word,int row, int col){
