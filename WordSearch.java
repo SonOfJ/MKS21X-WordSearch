@@ -59,6 +59,14 @@ public class WordSearch{
           }
         }
       }
+      board = board + "Words: ";
+      for(int i = 0; i < wordsAdded.size(); i = i + 1) {
+        board = board + wordsAdded.get(i);
+        if (i + 1 != wordsAdded.size()) {
+          board = board + ", ";
+        }
+      }
+      board = board + " (seed: " + seed + ")";
       return board;
     }
     public boolean addWordHorizontal(String word,int row, int col){
