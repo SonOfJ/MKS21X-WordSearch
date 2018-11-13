@@ -21,7 +21,19 @@ public class WordSearch{
       }
       addAllWords();
     }
-    public WordSearch(int rows, int cols, String fileName, int randSeed) {
+    public WordSearch(int rows, int cols, String fileName, int randSeed) throws FileNotFoundException{
+      seed = randSeed;
+      randgen = new Random(seed);
+      data = new char[rows][cols];
+      clear();
+      File stuff = new File(fileName);
+      Scanner read = new Scanner(stuff);
+      wordsToAdd = new ArrayList<>();
+      wordsAdded = new ArrayList<>();
+      while (read.hasNext()) {
+        wordsToAdd.add(read.nextLine().toUpperCase());
+      }
+      addAllWords();
     }
     private boolean addWord( int r, int c, String word, int rowIncrement, int colIncrement) {
     }
