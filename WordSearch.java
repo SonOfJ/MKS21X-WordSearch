@@ -6,14 +6,20 @@ public class WordSearch{
     private Random randgen;
     private ArrayList<String>wordsToAdd;
     private ArrayList<String>wordsAdded;
-    public WordSearch(int rows, int cols, String filename) throws FileNotFoundException {
-      if (rows < 0 || cols < 0) {
+    public WordSearch(int rows, int cols, String filename) {
+      if (rows < 1 || cols < 1) {
         throw new IllegalArgumentException();
       }
-      Scanner reader = new Scanner(new File(filename));
-      while (reader.hasNext()) {
-        wordsToAdd.add(reader.next().toUpperCase());
-      }
+      try {
+        Scanner reader = new Scanner(new File(filename));
+        while (reader.hasNext()) {
+          wordsToAdd.add(reader.next().toUpperCase());
+        }
+      } catch (FileNotFoundException e) {
+          System.out.println(filename + "does not exist.");
+          e.printStackTrace();
+          System.exit(1);
+        }
       data = new char[rows][cols];
       clear();
       randgen = new Random();
@@ -21,14 +27,20 @@ public class WordSearch{
       randgen = new Random(seed);
       addAllWords();
     }
-    public WordSearch(int rows, int cols, String filename, int randSeed) throws FileNotFoundException {
-      if (rows < 0 || cols < 0) {
+    public WordSearch(int rows, int cols, String filename, int randSeed) {
+      if (rows < 1 || cols < 1) {
         throw new IllegalArgumentException();
       }
-      Scanner reader = new Scanner(new File(filename));
-      while(reader.hasNext()) {
-        wordsToAdd.add(reader.next().toUpperCase());
-      }
+      try {
+        Scanner reader = new Scanner(new File(filename));
+        while(reader.hasNext()) {
+          wordsToAdd.add(reader.next().toUpperCase());
+        }
+      } catch (FileNotFoundException e) {
+          System.out.println(filename + "does not exist.");
+          e.printStackTrace();
+          System.exit(1);
+        }
       data = new char[rows][cols];
       clear();
       seed = randSeed;
@@ -89,19 +101,21 @@ public class WordSearch{
     public void addAllWords() {
       int size = wordsToAdd.size();
       for (int i = 0; wordsToAdd.size() > 0 && i < size + 100; i = i + 1) {
-        String word = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
-        int r = 0;
-        int c = 0;
-        while (r == 0) {
-          r = randgen.nextInt() % 2;
+        if (wordsToAdd.size() > 0) {
+          String word = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
+          int r = 0;
+          int c = 0;
+          while (r == 0) {
+            r = randgen.nextInt() % 2;
+          }
+          while (c == 0) {
+            c = randgen.nextInt() % 2;
+          }
+          int row = data.length;
+          int col = data[0].length;
+          for (int j = 0; j < 100 &&
+          !addWord(word, Math.abs(randgen.nextInt() % (row + 1)), Math.abs(randgen.nextInt() % (col + 1)), r, c); j = j + 1);
         }
-        while (c == 0) {
-          c = randgen.nextInt() % 2;
-        }
-        int row = data.length;
-        int col = data[0].length;
-        for (int j = 0; j < 100 &&
-        !addWord(word, Math.abs(randgen.nextInt() % (row + 1)), Math.abs(randgen.nextInt() % (col + 1)), r, c); j = j + 1);
       }
     }
     public boolean addWordHorizontal(String word,int row, int col){
