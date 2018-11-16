@@ -90,11 +90,11 @@ public class WordSearch{
         col < 0 ||
         rowIncrement == 0 && colIncrement == 0 ||
         row >= data.length ||
-        col >= data[row].length ||
-        data[row][col] != '_' && data[row][col] != word.charAt(i) ||
-        ) {
+        col >= data[row].length) {
           return false;
         }
+        for(int j = 0; i )
+                data[row][col] != '_' && data[row][col] != word.charAt(i)
         data[row][col] = word.charAt(i);
       }
       wordsAdded.add(word);
