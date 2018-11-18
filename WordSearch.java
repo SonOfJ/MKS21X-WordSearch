@@ -49,7 +49,7 @@ public class WordSearch{
     seed = randSeed;
     randgen = new Random(seed);
     addAllWords();
-    if (!key) {
+    if (key == false) {
       fill();
     }
   }
@@ -140,9 +140,32 @@ public class WordSearch{
     }
   }
   public static void main(String[] args) {
-    WordSearch Die = new WordSearch(10, 10, "words.txt");
-    WordSearch Live = new WordSearch(10, 10, "words.txt", Die.seed, true);
-    System.out.println(Die);
-    System.out.println(Live);
+    WordSearch DragonBallZ;
+    try {
+      if (args.length < 3 || args.length > 5) {
+        System.out.println("You need 3 to 5 arguments in the following order.");
+        System.out.println("Argument 1: Number of rows in the board.");
+        System.out.println("Argument 2: Number of columns in the board.");
+        System.out.println("Argument 3: Name of word file.");
+        System.out.println("Argument 4: Optional seed to generate a previous board.");
+        System.out.println("Argument 5: Type in KEY to print only the answers.");
+      } else if (args.length == 3) {
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+        System.out.println(DragonBallZ);
+      } else if (args.length == 4) {
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+        System.out.println(DragonBallZ);
+      } else if (args[4].equals("KEY")) {
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
+        System.out.println(DragonBallZ);
+      }
+    } catch (Exception e) {
+      System.out.println("You need 3 to 5 arguments in the following order.");
+      System.out.println("Argument 1: Number of rows in the board.");
+      System.out.println("Argument 2: Number of columns in the board.");
+      System.out.println("Argument 3: Name of word file.");
+      System.out.println("Argument 4: Optional seed to generate a previous board.");
+      System.out.println("Argument 5: Type in KEY to print only the answers.");
+    }
   }
 }
