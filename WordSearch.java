@@ -94,61 +94,55 @@ public class WordSearch{
     return board;
   }
   private boolean addWord( String word, int r, int c, int rowIncrement, int colIncrement) {
-    int j = 0;
-    if (word.length() == 0 ||
-    r < 0 ||
-    c < 0 ||
-    rowIncrement == 0 && colIncrement == 0 ||
-    r >= data.length ||
-    c >= data[0].length) {
+    if (rowIncrement == 0 && colIncrement == 0) {
       return false;
     }
-    int i = 0;
-    int row = r + i * rowIncrement;
-    int col = c + i * colIncrement;
-    for(; i < word.length(); i = i + 1) {
-      if (data[row][col] != word.charAt(i)) {
-        return false;
-      }
-      if (data[row][col] != ' ') {
+    if (rowIncrement == -1 && word.length() > r + 1) {
+      return false;
+    }
+    if (rowIncrement == 1 && word.length() > data.length - r) {
+      return false;
+    }
+    if (colIncrement == -1 && word.length() > c + 1) {
+      return false;
+    }
+    if (colIncrement == 1 && word.length() > data[0].length - c) {
+      return false;
+    }
+    for(int i = 0; i < word.length(); i = i + 1) {
+      if (data[r + i * rowIncrement][c + i * colIncrement] != word.charAt(i) && data[r + i * rowIncrement][c + i * colIncrement] != ' ') {
         return false;
       }
     }
-    i = 0;
-    for(; i < word.length(); i = i + 1) {
-      data[row][col] = word.charAt(i);
+    for(int i = 0; i < word.length(); i = i + 1) {
+      data[r + i * rowIncrement][c + i * colIncrement] = word.charAt(i);
     }
     wordsAdded.add(word);
     wordsToAdd.remove(word);
     return true;
   }
   private void addAllWords() {
-    for(int i = 0; i < 9000; i = i + 1) {
-      if (wordsToAdd.size() > 0) {
-        String word = wordsToAdd.get(randgen.nextInt(wordsToAdd.size()));
-        int rowIncrement = 0;
-        int colIncrement = 0;
-        while (rowIncrement == 0) {
-          rowIncrement = randgen.nextInt() % 2;
+    for(int i = 0; wordsToAdd.size() > 0 && i < 1000; i = i + 1) {
+      String word = wordsToAdd.get(randgen.nextInt(wordsToAdd.size()));
+      int rowIncrement = 0;
+      int colIncrement = 0;
+      while (rowIncrement == 0) {
+        rowIncrement = randgen.nextInt() % 2;
+      }
+      while (colIncrement == 0) {
+        colIncrement = randgen.nextInt() % 2;
+      }
+      for(int j = 0; j < 1000; j = j + 1) {
+        if (addWord(word, randgen.nextInt(data.length), randgen.nextInt(data[0].length), rowIncrement, colIncrement)) {
+          j = 1000;
         }
-        while (colIncrement == 0) {
-          colIncrement = randgen.nextInt() % 2;
-        }
-        for(int j = 0; j < 100 &&
-        !addWord(word, randgen.nextInt(data.length), randgen.nextInt(data[0].length), rowIncrement, colIncrement); j = j + 1);
       }
     }
   }
-  public String printWordsToAdd() {
-    String why = "";
-    for(int i = 0; i < wordsToAdd.size(); i = i + 1) {
-      why = why + wordsToAdd.get(i);
-    }
-    return why;
-  }
   public static void main(String[] args) {
     WordSearch Die = new WordSearch(10, 10, "words.txt");
-    System.out.println(Die.printWordsToAdd());
+    WordSearch Live = new WordSearch(10, 10, "words.txt", Die.seed, true);
     System.out.println(Die);
+    System.out.println(Live);
   }
 }
