@@ -24,7 +24,7 @@ public class WordSearch{
     data = new char[rows][cols];
     clear();
     randgen = new Random();
-    seed = randgen.nextInt();
+    seed = randgen.nextInt(10001);
     randgen = new Random(seed);
     addAllWords();
     fill();
@@ -141,25 +141,23 @@ public class WordSearch{
   }
   public static void main(String[] args) {
     WordSearch DragonBallZ;
-    try {
-      if (args.length < 3 || args.length > 5) {
-        System.out.println("You need 3 to 5 arguments in the following order.");
-        System.out.println("Argument 1: Number of rows in the board.");
-        System.out.println("Argument 2: Number of columns in the board.");
-        System.out.println("Argument 3: Name of word file.");
-        System.out.println("Argument 4: Optional seed to generate a previous board.");
-        System.out.println("Argument 5: Type in KEY to print only the answers.");
-      } else if (args.length == 3) {
-        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
-        System.out.println(DragonBallZ);
-      } else if (args.length == 4) {
-        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
-        System.out.println(DragonBallZ);
-      } else if (args[4].equals("KEY")) {
-        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
-        System.out.println(DragonBallZ);
-      }
-    } catch (Exception e) {
+    if (args.length < 3 || args.length > 5) {
+      System.out.println("You need 3 to 5 arguments in the following order.");
+      System.out.println("Argument 1: Number of rows in the board.");
+      System.out.println("Argument 2: Number of columns in the board.");
+      System.out.println("Argument 3: Name of word file.");
+      System.out.println("Argument 4: Optional seed to generate a previous board.");
+      System.out.println("Argument 5: Type in KEY to print only the answers.");
+    } else if (args.length == 3) {
+      DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+      System.out.println(DragonBallZ);
+    } else if (args.length == 4) {
+      DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+      System.out.println(DragonBallZ);
+    } else if (args[4].equals("KEY")) {
+      DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
+      System.out.println(DragonBallZ);
+    } else {
       System.out.println("You need 3 to 5 arguments in the following order.");
       System.out.println("Argument 1: Number of rows in the board.");
       System.out.println("Argument 2: Number of columns in the board.");
