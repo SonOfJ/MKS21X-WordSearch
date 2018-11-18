@@ -80,9 +80,16 @@ public class WordSearch{
       return board;
     }
     private boolean addWord( String word, int r, int c, int rowIncrement, int colIncrement) {
+      int j = 0;
+      int row = r + j * rowIncrement;
+      int col = c + j * colIncrement;
+      for(; j < word.length(); j = j + 1) {
+        if (data[r + rowIncrement][c + colIncrement] != '_' &&
+         data[r + rowIncrement][c + colIncrement] != word.charAt(j)) {
+           return false;
+         }
+       }
       for(int i = 0; i < word.length(); i = i + 1) {
-        int row = r + i * rowIncrement;
-        int col = c + i * colIncrement;
         if (word.length() == 0 ||
         r < 0 ||
         c < 0 ||
@@ -93,8 +100,6 @@ public class WordSearch{
         col >= data[row].length) {
           return false;
         }
-        for(int j = 0; i )
-                data[row][col] != '_' && data[row][col] != word.charAt(i)
         data[row][col] = word.charAt(i);
       }
       wordsAdded.add(word);
