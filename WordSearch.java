@@ -29,7 +29,7 @@ public class WordSearch{
     addAllWords();
     fill();
   }
-  public WordSearch(int rows, int cols, String filename, int randSeed, boolean key) {
+  public WordSearch(int rows, int cols, String filename, int randSeed, Boolean key) {
     if (rows < 1 || cols < 1) {
       throw new IllegalArgumentException();
     }
@@ -49,6 +49,9 @@ public class WordSearch{
     seed = randSeed;
     randgen = new Random(seed);
     addAllWords();
+    if (!key) {
+      fill();
+    }
   }
   private void clear(){
     for(int i = 0; i < data.length; i = i + 1) {
@@ -92,27 +95,26 @@ public class WordSearch{
   }
   private boolean addWord( String word, int r, int c, int rowIncrement, int colIncrement) {
     int j = 0;
-    int row = r + j * rowIncrement;
-    int col = c + j * colIncrement;
     if (word.length() == 0 ||
     r < 0 ||
     c < 0 ||
-    row < 0 ||
-    col < 0 ||
     rowIncrement == 0 && colIncrement == 0 ||
-    row >= data.length ||
-    col >= data[row].length) {
+    r >= data.length ||
+    c >= data[0].length) {
       return false;
     }
-    for(; j < word.length(); j = j + 1) {
-      if (data[row][col] != '_' &&
-      data[row][col] != word.charAt(j)) {
+    int i = 0;
+    int row = r + i * rowIncrement;
+    int col = c + i * colIncrement;
+    for(; i < word.length(); i = i + 1) {
+      if (data[row][col] != word.charAt(i)) {
+        return false;
+      }
+      if (data[row][col] != ' ') {
         return false;
       }
     }
-    int i = 0;
-    row = r + i * rowIncrement;
-    col = c + i * colIncrement;
+    i = 0;
     for(; i < word.length(); i = i + 1) {
       data[row][col] = word.charAt(i);
     }
