@@ -61,7 +61,7 @@ public class WordSearch{
     }
   }
   private void fill() {
-    String alpha = "qwertyuiopasdfghjklzxcvbnm";
+    String alpha = "QWERTYUIOPASDFGHJKLZXCVBNM";
     for(int i = 0; i < data.length; i = i + 1) {
       for(int j = 0; j < data[0].length; j = j + 1) {
         if (data[i][j] == ' ') {
@@ -123,28 +123,32 @@ public class WordSearch{
     return true;
   }
   private void addAllWords() {
-    int size = wordsToAdd.size();
-    for (int i = 0; wordsToAdd.size() > 0 && i < size + 100; i = i + 1) {
+    for(int i = 0; i < 9000; i = i + 1) {
       if (wordsToAdd.size() > 0) {
         String word = wordsToAdd.get(randgen.nextInt(wordsToAdd.size()));
-        int r = 0;
-        int c = 0;
-        while (r == 0) {
-          r = randgen.nextInt() % 2;
+        int rowIncrement = 0;
+        int colIncrement = 0;
+        while (rowIncrement == 0) {
+          rowIncrement = randgen.nextInt() % 2;
         }
-        while (c == 0) {
-          c = randgen.nextInt() % 2;
+        while (colIncrement == 0) {
+          colIncrement = randgen.nextInt() % 2;
         }
-        int row = data.length;
-        int col = data[0].length;
-          for (int j = 0; j < 100 &&
-          !addWord(word, randgen.nextInt(row + 1), randgen.nextInt(col + 1), r, c); j = j + 1);
-        }
+        for(int j = 0; j < 100 &&
+        !addWord(word, randgen.nextInt(data.length), randgen.nextInt(data[0].length), rowIncrement, colIncrement); j = j + 1);
       }
     }
-
-    public static void main(String[] args) {
-      WordSearch Die = new WordSearch(10, 10, "words.txt");
-      System.out.println(Die);
-      }
+  }
+  public String printWordsToAdd() {
+    String why = "";
+    for(int i = 0; i < wordsToAdd.size(); i = i + 1) {
+      why = why + wordsToAdd.get(i);
     }
+    return why;
+  }
+  public static void main(String[] args) {
+    WordSearch Die = new WordSearch(10, 10, "words.txt");
+    System.out.println(Die.printWordsToAdd());
+    System.out.println(Die);
+  }
+}
