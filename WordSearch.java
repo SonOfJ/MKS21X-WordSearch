@@ -141,29 +141,58 @@ public class WordSearch{
   }
   public static void main(String[] args) {
     WordSearch DragonBallZ;
-    if (args.length < 3 || args.length > 5) {
-      System.out.println("You need 3 to 5 arguments in the following order.");
-      System.out.println("Argument 1: Number of rows in the board.");
-      System.out.println("Argument 2: Number of columns in the board.");
-      System.out.println("Argument 3: Name of word file.");
-      System.out.println("Argument 4: Optional seed to generate a previous board.");
-      System.out.println("Argument 5: Type in KEY to print only the answers.");
-    } else if (args.length == 3) {
-      DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
-      System.out.println(DragonBallZ);
-    } else if (args.length == 4) {
-      DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
-      System.out.println(DragonBallZ);
-    } else if (args[4].equals("KEY")) {
-      DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
-      System.out.println(DragonBallZ);
-    } else {
-      System.out.println("You need 3 to 5 arguments in the following order.");
-      System.out.println("Argument 1: Number of rows in the board.");
-      System.out.println("Argument 2: Number of columns in the board.");
-      System.out.println("Argument 3: Name of word file.");
-      System.out.println("Argument 4: Optional seed to generate a previous board.");
-      System.out.println("Argument 5: Type in KEY to print only the answers.");
+    try {
+      if (args.length < 3 || args.length > 5) {
+        System.out.println("You need 3 to 5 arguments in the following order.");
+        System.out.println("Argument 1: Number of rows in the board.");
+        System.out.println("Argument 2: Number of columns in the board.");
+        System.out.println("Argument 3: Name of word file.");
+        System.out.println("Argument 4: Optional seed to generate a previous board.");
+        System.out.println("Argument 5: Type in KEY to print only the answers.");
+      } else if (args.length == 3) {
+        if (Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[1]) < 1) {
+          throw new IllegalArgumentException("Argument 1 and Argument 2 must be greater than 0.");
+        }
+        Scanner reader = new Scanner(new File(args[2]));
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+        System.out.println(DragonBallZ);
+      } else if (args.length == 4) {
+        if (Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[1]) < 1) {
+          throw new IllegalArgumentException("Argument 1 and Argument 2 must be greater than 0.");
+        }
+        if (Integer.parseInt(args[3]) < 0 || Integer.parseInt(args[3]) > 10000) {
+          throw new IllegalArgumentException("Argument 4 has to be between 0 and 10000 inclusive.");
+        }
+        Scanner reader = new Scanner(new File(args[2]));
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+        System.out.println(DragonBallZ);
+      } else if (args[4].equals("key")) {
+        if (Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[1]) < 1) {
+          throw new IllegalArgumentException("Argument 1 and Argument 2 must be greater than 0.");
+        }
+        if (Integer.parseInt(args[3]) < 0 || Integer.parseInt(args[3]) > 10000) {
+          throw new IllegalArgumentException("Argument 4 has to be between 0 and 10000 inclusive.");
+        }
+        Scanner reader = new Scanner(new File(args[2]));
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
+        System.out.println(DragonBallZ);
+      } else if (!args[4].equals("key")) {
+        if (Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[1]) < 1) {
+          throw new IllegalArgumentException("Argument 1 and Argument 2 must be greater than 0.");
+        }
+        if (Integer.parseInt(args[3]) < 0 || Integer.parseInt(args[3]) > 10000) {
+          throw new IllegalArgumentException("Argument 4 has to be between 0 and 10000 inclusive.");
+        }
+        Scanner reader = new Scanner(new File(args[2]));
+        DragonBallZ = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+        System.out.println(DragonBallZ);
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("File " + args[2] + " does not exist.");
+    } catch (NumberFormatException e) {
+      System.out.println("Please input integers for Argument 1, Argument 2, and Argument 4.");
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     }
   }
 }
